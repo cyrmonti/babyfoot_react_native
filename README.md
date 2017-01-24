@@ -6,4 +6,3 @@
 
 ##Usage
 - [Setting up React Native on your Desktop](https://facebook.github.io/react-native/docs/getting-started.html)
-
