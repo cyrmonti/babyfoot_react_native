@@ -15,7 +15,7 @@ const TabIcon = ({ selected, title }) => {
 const RouterComponent = () => {
     return (
     	<Router>
-            <Scene key="auth" >
+            <Scene key="auth" type="reset">
                 <Scene key="login" title="Login" component={LoginForm} sceneStyle={{ marginTop: 65 }} initial />
             </Scene>
 
