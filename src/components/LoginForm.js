@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { Card, CardSection, Input, Button } from './common';
+import { Actions } from 'react-native-router-flux';
 
 class LoginForm extends  React.Component {
     constructor() {
@@ -24,12 +25,12 @@ class LoginForm extends  React.Component {
         this.setState({ error: '' });
         console.log('Login press: ', email, password);
         if (email !== '' && password !== '') {
-
-
         }
         else {
             this.setState({ error: 'Empty field(s)' });
         }
+
+        Actions.tabbar();
     }
 
     renderError() {
