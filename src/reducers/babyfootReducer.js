@@ -1,4 +1,4 @@
-const INTIAL_STATE = [
+const INITIAL_STATE = [
     {
         id: 1,
         name: "PSG"
@@ -23,15 +23,24 @@ const INTIAL_STATE = [
         id: 6,
         name: "Milan AC"
     },
+    {
+        id: 7,
+        name: "Livepool F.C"
+    },
+    {
+        id: 8,
+        name: "Athlético Madrid"
+    },
 ];
 
 
+let lastId = INITIAL_STATE[INITIAL_STATE.length - 1].id + 1;
 
-const babyfoots = (state = INTIAL_STATE, action) => {
+const babyfootReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
     	case 'ADD_BABYFOOT':
             return [...state, {
-                id: action.payload.id,
+                id: lastId,
                 name: action.payload.name
             }];
 
@@ -45,4 +54,5 @@ const babyfoots = (state = INTIAL_STATE, action) => {
     }
 };
 
-export default babyfoots;
+
+export default babyfootReducer;

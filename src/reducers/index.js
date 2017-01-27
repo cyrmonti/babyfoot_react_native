@@ -3,8 +3,8 @@
  */
 
 import { combineReducers } from 'redux';
-import authReducer from './auth';
-import babyfootReducer from './babyfoots';
+import authReducer from './authReducer';
+import babyfootReducer from './babyfootReducer';
 
 const rootReducer = combineReducers({
 

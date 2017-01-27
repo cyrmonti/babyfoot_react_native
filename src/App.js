@@ -11,6 +11,10 @@ class App extends  React.Component {
   render() {
     const store = createStore(reducers);
 
+    store.subscribe(() => {
+            console.log(store.getState());
+    })
+
     return (
       <Provider store={store}>
       <Router />

@@ -1,25 +1,35 @@
 import React from 'react';
-import { View, Text, ListView } from 'react-native';
+import { View, Text, ListView, TouchableWithoutFeedback } from 'react-native';
 import { CardSection } from './common';
 import { connect } from 'react-redux'
+import { deleteBabyfoot } from '../actions'
 
 class ListBabyfoots extends React.Component {
 
 	componentWillMount() {
+        this.createDataSource(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps);
+    }
+
+    createDataSource({ babyfoots }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-
-        this.dataSource = ds.cloneWithRows(this.props.babyfoots);
+        this.dataSource = ds.cloneWithRows(babyfoots);
     }
 
     renderRow(babyfoot) {
         return (
-            <View>
-                <CardSection>
-                    <Text style={styles.titleStyle}>{babyfoot.name}</Text>
-                </CardSection>
-            </View>
+            <TouchableWithoutFeedback onPress={() => { this.props.deleteBabyfoot(babyfoot.id) }}>
+                <View>
+                    <CardSection>
+                        <Text style={styles.titleStyle}>{babyfoot.name}</Text>
+                    </CardSection>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 
@@ -28,7 +38,8 @@ class ListBabyfoots extends React.Component {
         return (
             <ListView
             	dataSource={this.dataSource}
-            	renderRow={this.renderRow}
+            	renderRow={this.renderRow.bind(this)}
+                enableEmptySections
             />
         );
     }
@@ -42,9 +53,9 @@ const mapStateToProps = state => {
 
 const styles = {
     titleStyle: {
-        fontSize: 18,
+        fontSize: 20,
         paddingLeft: 15
     }
 };
 
-export default connect(mapStateToProps)(ListBabyfoots);
+export default connect(mapStateToProps, { deleteBabyfoot })(ListBabyfoots);
