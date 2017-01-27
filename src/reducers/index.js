@@ -4,9 +4,12 @@
 
 import { combineReducers } from 'redux';
 import authReducer from './auth';
+import babyfootReducer from './babyfoots';
 
 const rootReducer = combineReducers({
-  user: authReducer
+
+  user: authReducer,
+  babyfoots: babyfootReducer
 });
 
 export default rootReducer;
