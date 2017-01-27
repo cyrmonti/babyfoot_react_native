@@ -29,7 +29,16 @@ const INTIAL_STATE = [
 
 const babyfoots = (state = INTIAL_STATE, action) => {
     switch(action.type) {
+    	case 'ADD_BABYFOOT':
+            return [...state, {
+                id: action.payload.id,
+                name: action.payload.name
+            }];
 
+        case 'DELETE_BABYFOOT':
+            return state.filter(babyfoot => {
+                return action.payload.id !== babyfoot.id
+			});
 
         default:
             return state;
