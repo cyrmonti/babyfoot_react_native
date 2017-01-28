@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions';
 
 import { Card, CardSection, Input, Button } from './common';
 import { Actions } from 'react-native-router-flux';
@@ -26,6 +28,7 @@ class LoginForm extends  React.Component {
         this.setState({ error: '' });
         console.log('Login press: ', email, password);
         if (email == DEFAULT_USER.email && password == DEFAULT_USER.password) {
+            this.props.loginUser();
             Actions.tabbar();
         }
         else if (email == '' || password == '')
@@ -92,4 +95,4 @@ const styles = {
     }
 };
 
-export default LoginForm;
+export default connect(null, { loginUser })(LoginForm);

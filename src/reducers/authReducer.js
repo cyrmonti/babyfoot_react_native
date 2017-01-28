@@ -2,12 +2,16 @@
  * Created by clementtailleur on 26/01/2017.
  */
 
-const INITIAL_STATE = {
+const authReducer = (state = null, action) => {
+  switch(action.type) {
+    case 'LOGIN_USER':
+      return action.payload.user;
+    case 'LOGOUT_USER':
+      return null;
+    default:
+      return state;
 
-};
-
-const authReducer = (state = INITIAL_STATE, action) => {
-  return null;
+  }
 };
 
 export default authReducer;
