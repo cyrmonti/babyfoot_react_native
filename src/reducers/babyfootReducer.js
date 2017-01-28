@@ -37,6 +37,7 @@ const INITIAL_STATE = [
 let lastId = INITIAL_STATE[INITIAL_STATE.length - 1].id + 1;
 
 const babyfootReducer = (state = INITIAL_STATE, action) => {
+
     switch(action.type) {
         case 'ADD_BABYFOOT':
             return [...state, {
