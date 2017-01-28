@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import { Button, CardSection } from './common';
 
@@ -12,6 +13,7 @@ class UserProfile extends React.Component {
     }
 
     render() {
+        console.log('USER PROFILE PAGE PROPS: ', this.props);
         return (
             <View>
                 <CardSection>
@@ -25,4 +27,10 @@ class UserProfile extends React.Component {
     }
 };
 
-export default UserProfile;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
+
+export default connect(mapStateToProps)(UserProfile);
