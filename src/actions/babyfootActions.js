@@ -11,3 +11,10 @@ export const addBabyfoot = (name) => {
         payload: { name }
     }
 };
+
+export const resetBabyfootList = () => {
+    return {
+        type: 'RESET_LIST_BABYFOOT',
+        payload: null
+    }
+};

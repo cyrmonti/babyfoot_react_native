@@ -38,17 +38,19 @@ let lastId = INITIAL_STATE[INITIAL_STATE.length - 1].id + 1;
 
 const babyfootReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
-    	case 'ADD_BABYFOOT':
+        case 'ADD_BABYFOOT':
             return [...state, {
-                id: lastId,
+                id: lastId++,
                 name: action.payload.name
             }];
 
         case 'DELETE_BABYFOOT':
             return state.filter(babyfoot => {
                 return action.payload.id !== babyfoot.id
-			});
+            });
 
+        case 'RESET_LIST_BABYFOOT':
+            return INITIAL_STATE;
         default:
             return state;
     }
