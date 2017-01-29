@@ -33,15 +33,27 @@ class ListBabyfoots extends React.Component {
         );
     }
 
+	renderList() {
+        if (!this.props.babyfoots.length) {
+            return (
+                <Text>No babyfoots in the list...</Text>
+            );
+        }
+        else {
+            return (
+                <ListView
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow.bind(this)}
+                    enableEmptySections
+                />
+            );
+        }
+
+    }
+
 
     render() {
-        return (
-            <ListView
-            	dataSource={this.dataSource}
-            	renderRow={this.renderRow.bind(this)}
-                enableEmptySections
-            />
-        );
+        return this.renderList();
     }
 }
 

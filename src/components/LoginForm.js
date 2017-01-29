@@ -30,7 +30,7 @@ class LoginForm extends  React.Component {
         if (email == DEFAULT_USER.email && password == DEFAULT_USER.password) {
             this.props.resetBabyfootList();
             this.props.loginUser();
-            Actions.tabbar();
+            Actions.tabbar({ type: 'reset' });
         }
         else if (email == '' || password == '')
             this.setState({ error: 'Empty field(s)' });
