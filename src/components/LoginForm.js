@@ -37,7 +37,7 @@ class LoginForm extends  React.Component {
         else
             this.setState({ error: 'Credentials incorrect'})
 
-    
+
     }
 
     renderError() {
@@ -65,6 +65,7 @@ class LoginForm extends  React.Component {
                     value={this.state.email}
                     onChangeText={this.updateEmailState.bind(this)}
                     placeholder={'user@gmail.com'}
+                    isNumeric={false}
                   />
               </CardSection>
 
@@ -74,6 +75,7 @@ class LoginForm extends  React.Component {
                     value={this.state.password}
                     onChangeText={password => this.setState({ password })}
                     placeholder={'enter password'}
+                    isNumeric={false}
                     secureTextEntry
                   />
               </CardSection>

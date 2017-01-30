@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, ListView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ListView, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import { CardSection } from './common';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { deleteBabyfoot } from '../actions'
 
 class ListBabyfoots extends React.Component {
 
-	componentWillMount() {
+    componentWillMount() {
         this.createDataSource(this.props);
     }
 
@@ -23,29 +23,31 @@ class ListBabyfoots extends React.Component {
 
     renderRow(babyfoot) {
         return (
-            <TouchableWithoutFeedback onPress={() => { this.props.deleteBabyfoot(babyfoot.id) }}>
-                <View>
-                    <CardSection>
-                        <Text style={styles.titleStyle}>{babyfoot.name}</Text>
-                    </CardSection>
-                </View>
-            </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => { this.props.deleteBabyfoot(babyfoot.id) }}>
+              <View>
+                  <CardSection>
+                      <Text style={styles.titleStyle}>{babyfoot.id} - {babyfoot.name}</Text>
+                  </CardSection>
+              </View>
+          </TouchableWithoutFeedback>
         );
     }
 
-	renderList() {
+    renderList() {
         if (!this.props.babyfoots.length) {
             return (
-                <Text>No babyfoots in the list...</Text>
+              <Text>No babyfoots in the list...</Text>
             );
         }
         else {
             return (
-                <ListView
+              <ScrollView>
+                  <ListView
                     dataSource={this.dataSource}
                     renderRow={this.renderRow.bind(this)}
                     enableEmptySections
-                />
+                  />
+              </ScrollView>
             );
         }
 

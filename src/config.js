@@ -8,5 +8,5 @@ export const DEFAULT_USER = {
   pseudo: 'root',
   name: 'root-name',
   firstname: 'root-firstname',
-  departmentNb: 75
+  department: 75
 };

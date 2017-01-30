@@ -29,22 +29,23 @@ class CreateBabyfoot extends React.Component {
 
     render() {
         return (
-            <Card>
-                <CardSection>
-                    <Input
-                        label={'Name'}
-                        value={this.state.name}
-                        onChangeText={this.updateNameState.bind(this)}
-                        placeholder={'Arsenal F.C'}
-                    />
-                </CardSection>
+          <Card>
+              <CardSection>
+                  <Input
+                    label={'Name'}
+                    value={this.state.name}
+                    onChangeText={this.updateNameState.bind(this)}
+                    placeholder={'Arsenal F.C'}
+                    isNumeric={false}
+                  />
+              </CardSection>
 
-                <CardSection>
-                    <Button onPress={this.onPressButton.bind(this)}>
-                        Create
-                    </Button>
-                </CardSection>
-            </Card>
+              <CardSection>
+                  <Button onPress={this.onPressButton.bind(this)}>
+                      Create
+                  </Button>
+              </CardSection>
+          </Card>
         );
     }
 

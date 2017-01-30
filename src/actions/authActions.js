@@ -13,3 +13,13 @@ export const loginUser = () => {
     }
   }
 };
+
+//does not save the user
+export const createUser = (user) => {
+  return {
+    type: 'CREATE_USER',
+    payload: {
+      user: user
+    }
+  }
+};
