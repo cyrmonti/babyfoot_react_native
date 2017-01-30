@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { loginUser, resetBabyfootList } from '../actions';
+import { loginUser, resetBabyfootList, createUser } from '../actions';
+import { DEFAULT_USER } from '../config';
+import { checkTokenExists, getUser } from '../localStorage';
 
 import { Card, CardSection, Input, Button } from './common';
-import { Actions } from 'react-native-router-flux';
-import { DEFAULT_USER } from '../config';
 
 class LoginForm extends  React.Component {
     constructor() {
@@ -15,6 +15,23 @@ class LoginForm extends  React.Component {
             password: '',
             error: ''
         };
+
+        //if token already exists, login with default user
+        checkTokenExists().then(exists => {
+            if (exists) {
+                //check if default user was connected
+                console.log('Token already exists, login..');
+                getUser().then(user => {
+                   if (user.email == 'root@babyfoot.com')
+                       this.props.loginUser();
+                   else
+                       this.props.createUser(user);
+                });
+            }
+            else {
+                console.log('Token does not exists');
+            }
+        })
     }
 
     updateEmailState(email) {
@@ -30,7 +47,6 @@ class LoginForm extends  React.Component {
         if (email == DEFAULT_USER.email && password == DEFAULT_USER.password) {
             this.props.resetBabyfootList();
             this.props.loginUser();
-            Actions.tabbar({ type: 'reset' });
         }
         else if (email == '' || password == '')
             this.setState({ error: 'Empty field(s)' });
@@ -42,50 +58,50 @@ class LoginForm extends  React.Component {
 
     renderError() {
         return (
-          <Text style={styles.errorTextStyle}>
-              {this.state.error}
-          </Text>
+            <Text style={styles.errorTextStyle}>
+                {this.state.error}
+            </Text>
         );
     }
 
     renderButton() {
         return (
-          <Button onPress={this.onPressButton.bind(this)}>
-              Login
-          </Button>
+            <Button onPress={this.onPressButton.bind(this)}>
+                Login
+            </Button>
         );
     }
 
     render() {
         return (
-          <Card>
-              <CardSection>
-                  <Input
-                    label={'Email'}
-                    value={this.state.email}
-                    onChangeText={this.updateEmailState.bind(this)}
-                    placeholder={'user@gmail.com'}
-                    isNumeric={false}
-                  />
-              </CardSection>
+            <Card>
+                <CardSection>
+                    <Input
+                        label={'Email'}
+                        value={this.state.email}
+                        onChangeText={this.updateEmailState.bind(this)}
+                        placeholder={'user@gmail.com'}
+                        isNumeric={false}
+                    />
+                </CardSection>
 
-              <CardSection>
-                  <Input
-                    label={'Password'}
-                    value={this.state.password}
-                    onChangeText={password => this.setState({ password })}
-                    placeholder={'enter password'}
-                    isNumeric={false}
-                    secureTextEntry
-                  />
-              </CardSection>
+                <CardSection>
+                    <Input
+                        label={'Password'}
+                        value={this.state.password}
+                        onChangeText={password => this.setState({ password })}
+                        placeholder={'enter password'}
+                        isNumeric={false}
+                        secureTextEntry
+                    />
+                </CardSection>
 
-              {this.renderError()}
+                {this.renderError()}
 
-              <CardSection>
-                  {this.renderButton()}
-              </CardSection>
-          </Card>
+                <CardSection>
+                    {this.renderButton()}
+                </CardSection>
+            </Card>
         );
     }
 }
@@ -99,4 +115,4 @@ const styles = {
     }
 };
 
-export default connect(null, { loginUser, resetBabyfootList })(LoginForm);
+export default connect(null, { loginUser, resetBabyfootList, createUser })(LoginForm);
