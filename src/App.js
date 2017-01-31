@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './reducers';
 import uuid from 'react-native-uuid';
-import { saveGUID, checkGUIDExists, getAllKeys } from './localStorage';
+import { saveGUID, checkGUIDExists } from './localStorage';
 
 
 import Router from './Router';
